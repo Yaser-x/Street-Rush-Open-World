@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/player_vehicle.gd" id="1_car"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(1.9, 0.85, 3.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(1.9, 0.8, 3.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cabin"]
+size = Vector3(1.55, 0.72, 1.85)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bumper"]
+size = Vector3(1.95, 0.22, 0.22)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wheel"]
+top_radius = 0.36
+bottom_radius = 0.36
+height = 0.24
+radial_segments = 12
+
+[node name="PlayerVehicle" type="RigidBody3D"]
+mass = 1150.0
+linear_damp = 0.15
+angular_damp = 2.4
+can_sleep = false
+script = ExtResource("1_car")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.72, 0)
+shape = SubResource("BoxShape3D_body")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.72, 0)
+mesh = SubResource("BoxMesh_body")
+
+[node name="CabinMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.43, -0.18)
+mesh = SubResource("BoxMesh_cabin")
+
+[node name="FrontBumper" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.42, -1.98)
+mesh = SubResource("BoxMesh_bumper")
+
+[node name="RearBumper" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.42, 1.98)
+mesh = SubResource("BoxMesh_bumper")
+
+[node name="WheelFrontLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-0.96, 0.38, -1.24)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="WheelFrontRight" type="MeshInstance3D" parent="."]
+position = Vector3(0.96, 0.38, -1.24)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="WheelRearLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-0.96, 0.38, 1.24)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="WheelRearRight" type="MeshInstance3D" parent="."]
+position = Vector3(0.96, 0.38, 1.24)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+position = Vector3(0, 2.4, 0.8)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+spring_length = 7.0
+margin = 0.25
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+current = true
+fov = 75.0

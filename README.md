@@ -2,28 +2,28 @@
 
 An original Android-first 3D open-world driving and life-simulation game.
 
-## Planned technology
-- Godot 4.7.2 Stable
-- GDScript
-- Mobile renderer, designed for Android-first performance
-- Free/open-source tools and assets only unless explicitly approved
+## Technology
+- Godot 4.7.2 Stable target
+- GDScript, 3D, Mobile renderer
+- Android landscape first; desktop keyboard input is retained for development/testing
+- Original procedural blockout assets; no copied GTA/Rockstar content
+- No crash-triggered vibration or haptics
 
-## First milestone
-Build and verify a small playable 3D driving prototype:
-- Fictional coastal-city test blockout
-- Third-person follow camera
-- Physics-driven player vehicle
-- Keyboard and on-screen touch controls
-- Speed/vehicle-status HUD
+## Phase 1 prototype
+The current foundation contains a small fictional coastal-city test block, a physics-driven player car, chase camera, touch driving HUD, keyboard controls, speed readout, collision geometry, and pause/resume.
 
-## Design commitments
-- The approved scope is 70 features, tracked in the project roadmap as it is implemented.
-- Muslim, Hindu, Sikh and other communities are represented respectfully as part of ordinary city life, without stereotypes.
-- No phone vibration on crashes.
-- Original fictional setting, characters, locations, vehicles and missions. No copied GTA/Rockstar content.
+## Open in Godot
+1. Download/open this repository in Godot 4.7.2 Stable.
+2. Import the project by selecting the repository root (the folder containing `project.godot`).
+3. Run `scenes/main.tscn` or press F6/F5.
+4. For Android, install matching Godot export templates and configure the Android SDK/JDK in Editor Settings before exporting.
 
-## Current repository state
-Planning documentation only. The Godot project files, playable scene, automated workflow and APK have not been committed or verified yet.
+The Android export preset is a starting configuration, not proof of a signed or installable APK. Configure a release keystore only for release builds.
 
-## Status
-This is an incremental project. The first playable slice must be built and tested before expanding into the full open world.
+## Controls
+- Keyboard: W/S or Up/Down to accelerate/reverse, A/D or Left/Right to steer, Space for handbrake, Esc to pause.
+- Touch: on-screen steering, accelerator, brake/reverse, and handbrake buttons.
+- Camera: third-person chase camera follows the vehicle.
+
+## Project status
+See [ROADMAP.md](ROADMAP.md) for the complete approved 70-feature scope and [HANDOFF.md](HANDOFF.md) for verified progress, tests, blockers, and the next task.
