@@ -85,14 +85,17 @@ jobs:
           mkdir -p build
           godot --headless --path . --export-debug "Android Debug" build/Street-Rush-Android-debug.apk
 
-      - name: Verify APK package and ARM64 native libraries
+      - name: Verify APK package, signature and ARM64 native library
         shell: bash
         run: |
           APK="build/Street-Rush-Android-debug.apk"
           test -s "$APK"
           unzip -t "$APK"
-          "$ANDROID_HOME/build-tools/36.1.0/aapt" dump badging "$APK" | grep -F "package: name='com.yaser.streetrushopenworld'"
-          unzip -l "$APK" | grep -q 'lib/arm64-v8a/'
+          APP_ID="$("$ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer" manifest application-id "$APK")"
+          test "$APP_ID" = "com.yaser.streetrushopenworld"
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -maxdepth 2 -type f -name apksigner | sort -V | tail -n 1)"
+          "$APKSIGNER" verify --verbose "$APK"
+          unzip -Z1 "$APK" | grep -F 'lib/arm64-v8a/libgodot_android.so'
 
       - name: Upload Android debug APK
         uses: actions/upload-artifact@v4
