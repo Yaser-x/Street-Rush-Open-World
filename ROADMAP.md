@@ -1,8 +1,8 @@
 # STREET RUSH: OPEN WORLD — 70-feature roadmap
 
-All 70 approved features are retained. Status: **Pending** unless explicitly marked otherwise. Phase 1 foundation work is a prototype implementation, not production completion.
+All 70 approved features are retained. Status: **Pending** unless explicitly marked otherwise. Phase 1 code and CI smoke tests are complete for the first prototype slice; physical Android testing remains outstanding.
 
-Legend: [x] implemented in current prototype slice; [~] partial/foundation only; [ ] pending.
+Legend: [x] verified implemented in current prototype slice; [~] partial/foundation only; [ ] pending.
 
 ## A. Open world and environment
 - [ ] 1. Massive fictional open world
@@ -10,7 +10,7 @@ Legend: [x] implemented in current prototype slice; [~] partial/foundation only;
 - [ ] 3. Villages
 - [ ] 4. Highways
 - [ ] 5. Mountains and hills
-- [ ] 6. Road network
+- [ ]  [ ] 6. Road network
 - [ ] 7. Landmarks
 - [ ] 8. Enterable interiors
 - [ ] 9. Commercial places
@@ -33,7 +33,7 @@ Legend: [x] implemented in current prototype slice; [~] partial/foundation only;
 - [ ] 22. SUVs and pickups
 - [ ] 23. Two-wheelers
 - [ ] 24. Heavy vehicles
-- [~] 25. Driving physics (initial RigidBody3D force/torque controller)
+- [~] 25. Driving physics (arcade RigidBody3D controller; CI smoke test verifies acceleration and braking)
 - [ ] 26. Vehicle damage
 - [ ] 27. Garage and repair
 - [ ] 28. Vehicle customization
@@ -90,7 +90,7 @@ Legend: [x] implemented in current prototype slice; [~] partial/foundation only;
 
 ## Milestones
 - [~] Phase 0: repository audit and initial Godot project scaffold
-- [~] Phase 1: first playable driving prototype implementation; runtime verification still required
+- [~] Phase 1: prototype source and automated acceleration/braking smoke test passed; ARM64 debug APK exported and verified; physical Android device test pending
 - [ ] Phase 2: on-foot character, vehicle enter/exit, NPCs and basic traffic
 - [ ] Phase 3: expand environment
 - [ ] Phase 4: gameplay systems
