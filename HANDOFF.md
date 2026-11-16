@@ -11,7 +11,7 @@ Updated: 2026-11-16
 - GitHub connection reported admin/maintain/push permission.
 
 ## Current milestone
-Phase 1 implementation scaffold: a Godot 4.7.2-targeted project with a procedural coastal test block, physics-based placeholder car, third-person spring-arm camera, touch HUD, keyboard controls, speed display, pause toggle, and headless CI validation workflow.
+Phase 1 implementation scaffold: Godot 4.7.2-targeted project, Mobile renderer, fixed landscape orientation, procedural coastal test block, physics-based placeholder car, third-person spring-arm camera, touch HUD, keyboard controls, speed display, pause toggle, and headless CI validation workflow.
 
 ## Feature status
 - Implemented as prototype code: 25 (initial driving physics), 58 (third-person camera foundation).
@@ -24,17 +24,17 @@ Phase 1 implementation scaffold: a Godot 4.7.2-targeted project with a procedura
 - Repository and development branch inspected through GitHub on 2026-11-16.
 - Initial branch tree contained README.md only.
 - GitHub Actions run #1 (commit 69bc938348afa5ac39b2dfb98c2caca7b09cbb34): SUCCESS. Godot setup, editor import/parse, and headless main-scene launch all completed successfully.
-- GitHub Actions run #2 (commit c0ce6bd0b00f3300b5dd235c623133a7e6466f54): project import/parse passed; headless launch was still in progress at the last observation.
-- A source review fixed the HUD static type binding (CanvasLayer to MobileHUD) before the second run.
+- GitHub Actions run #2 (commit c0ce6bd0b00f3300b5dd235c623133a7e6466f54): SUCCESS. Godot setup, editor import/parse, and headless main-scene launch all completed successfully after the HUD static type correction.
+- GitHub Actions run #3 (commit e85911642f4148dcba083e188a0358a1b679109b): IN PROGRESS at last observation; validates the landscape/mobile renderer configuration correction.
 - Android APK: NOT BUILT. Android SDK/JDK, Godot export templates, signing configuration, and a successful export have not been verified.
 - Visual/gameplay verification on a physical Android device: NOT RUN.
 - Prototype assets are primitive procedural blockout geometry, not final production assets.
 
 ## Build notes
-Open the repository root in Godot 4.7.2 Stable and run res://scenes/main.tscn. The project uses the Mobile renderer and fixed landscape orientation. An Android export preset is not yet configured; first establish a reproducible export setup with compatible SDK/JDK and Godot export templates.
+Open the repository root in Godot 4.7.2 Stable and run res://scenes/main.tscn. The project uses the Mobile renderer and fixed landscape orientation (SCREEN_LANDSCAPE). An Android export preset is not yet configured; first establish a reproducible export setup with compatible SDK/JDK and Godot export templates.
 
 ## Last successful commit
-c0ce6bd0b00f3300b5dd235c623133a7e6466f54 (HUD type fix and mobile controls). A configuration correction for landscape orientation and Mobile feature tagging is being committed immediately after this handoff revision.
+e85911642f4148dcba083e188a0358a1b679109b (landscape orientation and project feature tag correction). Branch head verified on GitHub.
 
 ## Current blockers
 1. Physical Android playtest and visual inspection have not been performed.
@@ -42,4 +42,4 @@ c0ce6bd0b00f3300b5dd235c623133a7e6466f54 (HUD type fix and mobile controls). A c
 3. Driving physics and touch layout need in-engine and physical-device tuning.
 
 ## Next exact task
-Check the current GitHub Actions run to completion and inspect any errors. Then add a reproducible Android export preset and build an APK in CI; test installation and driving controls on the target Android device.
+Confirm GitHub Actions run #3 succeeds on the current head. Then add a reproducible Android export preset and build an APK in CI; test installation and driving controls on the target Android device.
