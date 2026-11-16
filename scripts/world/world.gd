@@ -8,7 +8,8 @@ func _ready() -> void:
 	_build_test_district()
 	var vehicle: PlayerVehicle = VEHICLE_SCENE.instantiate()
 	add_child(vehicle)
-	vehicle.global_position = Vector3(0.0, 0.18, 18.0)
+	# Road top is y=0.05; the collision body's lower face is 0.295 m below the root.
+	vehicle.global_position = Vector3(0.0, -0.245, 18.0)
 	var hud: MobileHUD = HUD_SCRIPT.new()
 	add_child(hud)
 	hud.bind_vehicle(vehicle)

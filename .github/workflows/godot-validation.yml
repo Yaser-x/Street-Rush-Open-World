@@ -28,3 +28,6 @@ jobs:
 
       - name: Launch main scene headlessly
         run: godot --headless --path . --quit-after 5
+
+      - name: Run driving prototype smoke test
+        run: godot --headless --path . --script res://tests/prototype_smoke_test.gd
