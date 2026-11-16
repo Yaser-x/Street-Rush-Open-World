@@ -2,35 +2,28 @@
 
 An original Android-first 3D open-world driving and life-simulation game.
 
-## Engine
+## Planned technology
 - Godot 4.7.2 Stable
 - GDScript
 - Mobile renderer, designed for Android-first performance
-- No paid engine, plug-in, backend, or mandatory account
+- Free/open-source tools and assets only unless explicitly approved
 
-## Current milestone
-**Milestone 01 — 3D driving foundation**
-- Procedural fictional coastal-city blockout
+## First milestone
+Build and verify a small playable 3D driving prototype:
+- Fictional coastal-city test blockout
 - Third-person follow camera
 - Physics-driven player vehicle
-- Touch and keyboard controls
-- Ambient pedestrians and basic traffic
-- Early city landmarks and HUD
+- Keyboard and on-screen touch controls
+- Speed/vehicle-status HUD
 
 ## Design commitments
-- All 62 selected feature ideas are tracked in `ROADMAP.md`.
+- The approved scope is 70 features, tracked in the project roadmap as it is implemented.
 - Muslim, Hindu, Sikh and other communities are represented respectfully as part of ordinary city life, without stereotypes.
-- Crash-triggered phone vibration is intentionally excluded.
+- No phone vibration on crashes.
 - Original fictional setting, characters, locations, vehicles and missions. No copied GTA/Rockstar content.
 
-## Run
-Open this folder in Godot 4.7.2 Stable and run `scenes/main.tscn`.
-
-Desktop controls: WASD / arrow keys to drive, Space for handbrake, Shift for nitro, Escape to pause.
-Mobile: landscape touch controls are displayed in-game.
-
-## Verification
-GitHub Actions checks the project with the headless Godot editor and launches the main scene. Android APK export will be added after the first milestone is stable.
+## Current repository state
+Planning documentation only. The Godot project files, playable scene, automated workflow and APK have not been committed or verified yet.
 
 ## Status
-This is an incremental prototype repository, not a finished open-world game. See ROADMAP.md for the current scope and verification status.
+This is an incremental project. The first playable slice must be built and tested before expanding into the full open world.
