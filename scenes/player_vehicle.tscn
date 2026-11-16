@@ -1,6 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/vehicles/player_vehicle.gd" id="1_car"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vehicle"]
+friction = 0.55
+bounce = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_body"]
 size = Vector3(1.9, 0.85, 3.9)
@@ -22,6 +26,7 @@ radial_segments = 12
 
 [node name="PlayerVehicle" type="RigidBody3D"]
 mass = 1150.0
+physics_material_override = SubResource("PhysicsMaterial_vehicle")
 linear_damp = 0.15
 angular_damp = 2.4
 can_sleep = false
