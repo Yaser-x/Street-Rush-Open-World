@@ -5,43 +5,48 @@ Updated: 2026-11-16
 ## Repository
 - Repository: Yaser-x/Street-Rush-Open-World
 - Working branch: prototype/godot-3d-foundation
-- Main branch has not been modified.
-- Current base before this test correction: 8581abeb36fba54fbaface8cc5c46618e341a30c
+- Main branch remains untouched.
+- Base commit for this correction: 5c863f6f398944e74b13443b5df079719c174c76
 
 ## Current milestone
-Phase 1 driving foundation: Godot 4.7.2-targeted Mobile project with procedural coastal blockout, physics-driven car, third-person camera, touch HUD, keyboard input and pause/resume. Prototype geometry only.
+Phase 1 driving foundation: Godot 4.7.2-targeted Mobile project with procedural coastal blockout, physics-driven placeholder car, third-person camera, touch HUD, keyboard input and pause/resume. Placeholder geometry only.
 
-## Implemented in latest source commit
-- Corrected car spawn height to align collision shape with road surface.
-- Reworked driving force model: forward/reverse speed limiting, steering torque, lateral grip, aerodynamic drag, downforce, braking and handbrake grip reduction.
-- Added headless smoke test for main scene, vehicle spawn, acceleration and braking.
-- First smoke-test run FAILED because the test directly called vehicle input while the active HUD correctly overwrote it each frame. This was a test harness error, not evidence of working driving.
-- Updated smoke test to operate the actual HUD control path for accelerator and brake. This correction awaits CI verification.
-- No crash-triggered vibration/haptic code is included.
+## Source improvements already committed
+- Car spawn height aligned with road surface.
+- Vehicle force model now includes forward/reverse speed limits, speed-sensitive steering, lateral grip, drag, downforce, braking and handbrake grip reduction.
+- A smoke test was added for main scene, vehicle spawn, HUD input, acceleration and braking.
+
+## Test diagnosis
+- Run #7 passed project import and headless main scene but failed acceleration check because the initial test bypassed the HUD input path.
+- Run #8 also failed acceleration check even after setting HUD controls; the test was running in SceneTree script mode rather than a normal game scene.
+- The test has now been converted to a regular Node scene and asserts physics processing and HUD-to-controller input propagation before checking movement. It prints diagnostic position/velocity/input on failure. Awaiting CI verification.
+- These failures are recorded rather than being marked passed.
 
 ## Feature status
 - Partial foundations: 20 (placeholder passenger car), 25 (prototype driving physics), 58 (third-person camera).
-- Other approved features remain pending and tracked in ROADMAP.md. No approved feature removed.
-- Phase 1 requires successful automated driving test, visual tuning and Android device test.
+- All remaining approved features are still pending in ROADMAP.md.
+- No crash-triggered vibration/haptic code included.
 
 ## Verification
-- Prior Godot CI runs #1 through #6 passed project import and headless main scene launch.
-- Run #7, commit 8581abeb36fba54fbaface8cc5c46618e341a30c: project import and headless main scene passed; new smoke test failed because test bypassed HUD input and HUD reset the vehicle command each frame.
-- Smoke test now uses HUD's same control path as touch buttons. Awaiting next CI run.
-- Android APK: not built.
-- Physical Android playtest: not performed.
-- Assets remain procedural placeholders.
+- CI runs #1 through #6 passed import and headless main-scene launch.
+- Runs #7 and #8 passed import and headless main-scene launch but failed the newly introduced acceleration smoke test.
+- Current regular-scene smoke-test correction has not yet been run.
+- Android APK not built.
+- Physical Android playtest not performed.
+- Procedural blockout assets are not final production assets.
 
-## Build
-Open the repository root in Godot 4.7.2 Stable and run res://scenes/main.tscn. Android export still needs SDK/JDK, export templates, package identity and signing configuration.
+## Android export research
+- Godot Android export requires matching export templates, Java SDK and Android SDK paths configured in editor settings. Official Godot docs recommend JDK 17 for manual setup.
+- Next export workflow will use a debug APK with arm64-v8a enabled. No release signing secret or paid service is required for this prototype debug build.
+- Android export is not configured or verified yet.
 
 ## Last known passing commit
-bc3e4387664d53d1c5d30cfca8057ff6bef39247 for previous project/headless scene tests. Run #7 passed scene launch but failed new driving smoke test.
+bc3e4387664d53d1c5d30cfca8057ff6bef39247 for project import and headless main-scene launch. Current branch contains later physics changes whose automated driving test is pending.
 
 ## Current blockers
-1. HUD-driven smoke test correction needs CI confirmation.
-2. Android export toolchain and signing configuration are not configured.
-3. Physical device playtest and driving feel tuning remain pending.
+1. Verify regular-scene smoke test and fix actual physics/controller issues if it still fails.
+2. Android SDK/JDK/export templates and editor settings need CI configuration.
+3. Physical device playtest and tuning remain pending.
 
 ## Next exact task
-Verify corrected smoke test in GitHub Actions; inspect and fix any actual runtime or physics issue. Then investigate Android export runner setup and produce a reproducible APK build.
+Verify the in-game-loop smoke test. Once it passes, add a debug Android export preset and a CI job to generate an ARM64 APK, then verify the APK artifact exists and is valid.
