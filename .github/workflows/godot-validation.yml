@@ -1,4 +1,4 @@
-name: Godot project validation
+name: Godot project validation and Android debug build
 
 on:
   push:
@@ -31,3 +31,71 @@ jobs:
 
       - name: Run driving prototype smoke test
         run: godot --headless --path . --script res://tests/prototype_smoke_test.gd
+
+  android-debug-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses >/dev/null
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.1.0" "cmdline-tools;latest" "ndk;29.0.14206865" "cmake;3.22.1"
+
+      - name: Set up Godot and matching Android export templates
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: true
+
+      - name: Configure temporary debug signing and Godot editor settings
+        shell: bash
+        run: |
+          mkdir -p "$HOME/.config/godot" "$HOME/.android" build
+          keytool -genkeypair -v             -keystore "$HOME/.android/street-rush-debug.keystore"             -storetype JKS             -storepass android             -alias androiddebugkey             -keypass android             -keyalg RSA             -keysize 2048             -validity 10000             -dname "CN=Street Rush Debug,O=Street Rush,C=IN"
+          cat > "$HOME/.config/godot/editor_settings-4.tres" <<EOF
+          [gd_resource type="EditorSettings" format=3]
+
+          [resource]
+          export/android/java_sdk_path = "$JAVA_HOME"
+          export/android/android_sdk_path = "$ANDROID_HOME"
+          export/android/debug_keystore = "$HOME/.android/street-rush-debug.keystore"
+          export/android/debug_keystore_user = "androiddebugkey"
+          export/android/debug_keystore_pass = "android"
+          EOF
+
+      - name: Import project for Android export
+        run: godot --headless --editor --path . --quit
+
+      - name: Export ARM64 Android debug APK
+        run: |
+          mkdir -p build
+          godot --headless --path . --export-debug "Android Debug" build/Street-Rush-Android-debug.apk
+
+      - name: Verify APK package and ARM64 native libraries
+        shell: bash
+        run: |
+          APK="build/Street-Rush-Android-debug.apk"
+          test -s "$APK"
+          unzip -t "$APK"
+          "$ANDROID_HOME/build-tools/36.1.0/aapt" dump badging "$APK" | grep -F "package: name='com.yaser.streetrushopenworld'"
+          unzip -l "$APK" | grep -q 'lib/arm64-v8a/'
+
+      - name: Upload Android debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Street-Rush-Android-ARM64-Debug
+          path: build/Street-Rush-Android-debug.apk
+          if-no-files-found: error
+          retention-days: 7
