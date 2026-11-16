@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name MobileHUD
 
 var vehicle: PlayerVehicle
 var throttle_value: float = 0.0
@@ -6,7 +7,6 @@ var steering_value: float = 0.0
 var brake_value: float = 0.0
 var handbrake_value: bool = false
 var speed_label: Label
-var pause_button: Button
 
 func bind_vehicle(target: PlayerVehicle) -> void:
 	vehicle = target

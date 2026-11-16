@@ -9,8 +9,7 @@ func _ready() -> void:
 	var vehicle: PlayerVehicle = VEHICLE_SCENE.instantiate()
 	add_child(vehicle)
 	vehicle.global_position = Vector3(0.0, 0.18, 18.0)
-	var hud := CanvasLayer.new()
-	hud.set_script(HUD_SCRIPT)
+	var hud: MobileHUD = HUD_SCRIPT.new()
 	add_child(hud)
 	hud.bind_vehicle(vehicle)
 
