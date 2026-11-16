@@ -10,7 +10,7 @@ Legend: [x] verified implemented in current prototype slice; [~] partial/foundat
 - [ ] 3. Villages
 - [ ] 4. Highways
 - [ ] 5. Mountains and hills
-- [ ]  [ ] 6. Road network
+- [ ] 6. Road network
 - [ ] 7. Landmarks
 - [ ] 8. Enterable interiors
 - [ ] 9. Commercial places
