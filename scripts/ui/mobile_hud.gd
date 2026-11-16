@@ -45,9 +45,10 @@ func _build_ui() -> void:
 
 	_make_hold_button("◀", "steer_left", Vector2(0.0, 1.0), Vector2(24, -116), Vector2(96, -34))
 	_make_hold_button("▶", "steer_right", Vector2(0.0, 1.0), Vector2(104, -116), Vector2(176, -34))
+	_make_hold_button("REV", "reverse", Vector2(1.0, 1.0), Vector2(-468, -86), Vector2(-372, -28))
+	_make_hold_button("DRIFT", "handbrake", Vector2(1.0, 1.0), Vector2(-360, -86), Vector2(-264, -28))
 	_make_hold_button("BRAKE", "brake", Vector2(1.0, 1.0), Vector2(-252, -108), Vector2(-164, -28))
 	_make_hold_button("GAS", "accelerate", Vector2(1.0, 1.0), Vector2(-148, -132), Vector2(-48, -28))
-	_make_hold_button("DRIFT", "handbrake", Vector2(1.0, 1.0), Vector2(-360, -86), Vector2(-264, -28))
 
 func _make_hold_button(caption: String, control: String, anchor: Vector2, offset_min: Vector2, offset_max: Vector2) -> void:
 	var button := _make_button(caption, offset_max - offset_min, anchor, offset_min, offset_max)
